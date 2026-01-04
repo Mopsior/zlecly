@@ -7,11 +7,13 @@ const locales = ['pl']
 export default getRequestConfig(async () => {
     const browserHeaders = await headers()
     const store = await cookies()
-    const browserLanguage = new Negotiator({ headers: Object.fromEntries(browserHeaders) }).language(locales)
+    const browserLanguage = new Negotiator({
+        headers: Object.fromEntries(browserHeaders),
+    }).language(locales)
     const locale = store.get('locale')?.value || browserLanguage || locales[0]
 
     return {
         locale,
-        messages: (await import(`@/messages/${locale}.json`)).default
+        messages: (await import(`@/messages/${locale}.json`)).default,
     }
 })

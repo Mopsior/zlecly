@@ -1,7 +1,3 @@
 export const ClerkWrapper = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <div className='w-full mt-20 flex justify-center items-center'>
-            {children}
-        </div>
-    )
+    return <div className='mt-20 flex w-full items-center justify-center'>{children}</div>
 }
