@@ -87,5 +87,8 @@
             "eslint --fix --max-warnings=0"
         ],
         "*.{css,json,md}": "prettier --write"
+    },
+    "engines": {
+        "node": "22.20.0"
     }
 }
