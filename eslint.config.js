@@ -7,6 +7,8 @@ export default [
     {
         rules: {
             'no-shadow': 'off',
+            'require-await': 'off',
+            '@typescript-eslint/require-await': 'off',
         },
     },
 ]

@@ -12,119 +12,190 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteRouteImport } from './routes/app/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
-import { Route as AppSummaryRouteImport } from './routes/app/summary'
+import { Route as authWaitlistRouteImport } from './routes/(auth)/waitlist'
+import { Route as AppSummaryIndexRouteImport } from './routes/app/summary/index'
+import { Route as authSignUpSplatRouteImport } from './routes/(auth)/sign-up.$'
+import { Route as authSignInSplatRouteImport } from './routes/(auth)/sign-in.$'
 
 const AppRouteRoute = AppRouteRouteImport.update({
-    id: '/app',
-    path: '/app',
-    getParentRoute: () => rootRouteImport,
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => AppRouteRoute,
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRouteRoute,
 } as any)
-const AppSummaryRoute = AppSummaryRouteImport.update({
-    id: '/summary',
-    path: '/summary',
-    getParentRoute: () => AppRouteRoute,
+const authWaitlistRoute = authWaitlistRouteImport.update({
+  id: '/(auth)/waitlist',
+  path: '/waitlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppSummaryIndexRoute = AppSummaryIndexRouteImport.update({
+  id: '/summary/',
+  path: '/summary/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const authSignUpSplatRoute = authSignUpSplatRouteImport.update({
+  id: '/(auth)/sign-up/$',
+  path: '/sign-up/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const authSignInSplatRoute = authSignInSplatRouteImport.update({
+  id: '/(auth)/sign-in/$',
+  path: '/sign-in/$',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-    '/': typeof IndexRoute
-    '/app': typeof AppRouteRouteWithChildren
-    '/app/summary': typeof AppSummaryRoute
-    '/app/': typeof AppIndexRoute
+  '/': typeof IndexRoute
+  '/app': typeof AppRouteRouteWithChildren
+  '/waitlist': typeof authWaitlistRoute
+  '/app/': typeof AppIndexRoute
+  '/sign-in/$': typeof authSignInSplatRoute
+  '/sign-up/$': typeof authSignUpSplatRoute
+  '/app/summary': typeof AppSummaryIndexRoute
 }
 export interface FileRoutesByTo {
-    '/': typeof IndexRoute
-    '/app/summary': typeof AppSummaryRoute
-    '/app': typeof AppIndexRoute
+  '/': typeof IndexRoute
+  '/waitlist': typeof authWaitlistRoute
+  '/app': typeof AppIndexRoute
+  '/sign-in/$': typeof authSignInSplatRoute
+  '/sign-up/$': typeof authSignUpSplatRoute
+  '/app/summary': typeof AppSummaryIndexRoute
 }
 export interface FileRoutesById {
-    __root__: typeof rootRouteImport
-    '/': typeof IndexRoute
-    '/app': typeof AppRouteRouteWithChildren
-    '/app/summary': typeof AppSummaryRoute
-    '/app/': typeof AppIndexRoute
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/app': typeof AppRouteRouteWithChildren
+  '/(auth)/waitlist': typeof authWaitlistRoute
+  '/app/': typeof AppIndexRoute
+  '/(auth)/sign-in/$': typeof authSignInSplatRoute
+  '/(auth)/sign-up/$': typeof authSignUpSplatRoute
+  '/app/summary/': typeof AppSummaryIndexRoute
 }
 export interface FileRouteTypes {
-    fileRoutesByFullPath: FileRoutesByFullPath
-    fullPaths: '/' | '/app' | '/app/summary' | '/app/'
-    fileRoutesByTo: FileRoutesByTo
-    to: '/' | '/app/summary' | '/app'
-    id: '__root__' | '/' | '/app' | '/app/summary' | '/app/'
-    fileRoutesById: FileRoutesById
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/waitlist'
+    | '/app/'
+    | '/sign-in/$'
+    | '/sign-up/$'
+    | '/app/summary'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/waitlist' | '/app' | '/sign-in/$' | '/sign-up/$' | '/app/summary'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/(auth)/waitlist'
+    | '/app/'
+    | '/(auth)/sign-in/$'
+    | '/(auth)/sign-up/$'
+    | '/app/summary/'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-    IndexRoute: typeof IndexRoute
-    AppRouteRoute: typeof AppRouteRouteWithChildren
+  IndexRoute: typeof IndexRoute
+  AppRouteRoute: typeof AppRouteRouteWithChildren
+  authWaitlistRoute: typeof authWaitlistRoute
+  authSignInSplatRoute: typeof authSignInSplatRoute
+  authSignUpSplatRoute: typeof authSignUpSplatRoute
 }
 
 declare module '@tanstack/react-router' {
-    interface FileRoutesByPath {
-        '/app': {
-            id: '/app'
-            path: '/app'
-            fullPath: '/app'
-            preLoaderRoute: typeof AppRouteRouteImport
-            parentRoute: typeof rootRouteImport
-        }
-        '/': {
-            id: '/'
-            path: '/'
-            fullPath: '/'
-            preLoaderRoute: typeof IndexRouteImport
-            parentRoute: typeof rootRouteImport
-        }
-        '/app/': {
-            id: '/app/'
-            path: '/'
-            fullPath: '/app/'
-            preLoaderRoute: typeof AppIndexRouteImport
-            parentRoute: typeof AppRouteRoute
-        }
-        '/app/summary': {
-            id: '/app/summary'
-            path: '/summary'
-            fullPath: '/app/summary'
-            preLoaderRoute: typeof AppSummaryRouteImport
-            parentRoute: typeof AppRouteRoute
-        }
+  interface FileRoutesByPath {
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteRouteImport
+      parentRoute: typeof rootRouteImport
     }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/(auth)/waitlist': {
+      id: '/(auth)/waitlist'
+      path: '/waitlist'
+      fullPath: '/waitlist'
+      preLoaderRoute: typeof authWaitlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/summary/': {
+      id: '/app/summary/'
+      path: '/summary'
+      fullPath: '/app/summary'
+      preLoaderRoute: typeof AppSummaryIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/(auth)/sign-up/$': {
+      id: '/(auth)/sign-up/$'
+      path: '/sign-up/$'
+      fullPath: '/sign-up/$'
+      preLoaderRoute: typeof authSignUpSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/sign-in/$': {
+      id: '/(auth)/sign-in/$'
+      path: '/sign-in/$'
+      fullPath: '/sign-in/$'
+      preLoaderRoute: typeof authSignInSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 interface AppRouteRouteChildren {
-    AppSummaryRoute: typeof AppSummaryRoute
-    AppIndexRoute: typeof AppIndexRoute
+  AppIndexRoute: typeof AppIndexRoute
+  AppSummaryIndexRoute: typeof AppSummaryIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
-    AppSummaryRoute: AppSummaryRoute,
-    AppIndexRoute: AppIndexRoute,
+  AppIndexRoute: AppIndexRoute,
+  AppSummaryIndexRoute: AppSummaryIndexRoute,
 }
 
-const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(AppRouteRouteChildren)
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
+  AppRouteRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
-    IndexRoute: IndexRoute,
-    AppRouteRoute: AppRouteRouteWithChildren,
+  IndexRoute: IndexRoute,
+  AppRouteRoute: AppRouteRouteWithChildren,
+  authWaitlistRoute: authWaitlistRoute,
+  authSignInSplatRoute: authSignInSplatRoute,
+  authSignUpSplatRoute: authSignUpSplatRoute,
 }
 export const routeTree = rootRouteImport
-    ._addFileChildren(rootRouteChildren)
-    ._addFileTypes<FileRouteTypes>()
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
 import type { startInstance } from './start.ts'
 declare module '@tanstack/react-start' {
-    interface Register {
-        ssr: true
-        router: Awaited<ReturnType<typeof getRouter>>
-        config: Awaited<ReturnType<typeof startInstance.getOptions>>
-    }
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
 }

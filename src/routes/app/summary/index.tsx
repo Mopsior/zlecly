@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import Drawer from '@/components/vaul'
 
-export const Route = createFileRoute('/app/')({
+export const Route = createFileRoute('/app/summary/')({
     component: RouteComponent,
 })
 

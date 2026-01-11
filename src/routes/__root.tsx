@@ -2,11 +2,14 @@ import { HeadContent, Scripts, createRootRoute, useRouter } from '@tanstack/reac
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { ClerkProvider } from '@clerk/tanstack-react-start'
+import { shadcn } from '@clerk/themes'
+import { enUS, plPL } from '@clerk/localizations'
 
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
 import appCss from '../styles.css?url'
 import { ThemeProvider } from '@/utils/theme-provider'
+import { Language } from '@/types/enums'
 
 export const Route = createRootRoute({
     head: () => ({
@@ -48,12 +51,16 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     }, [router])
 
     return (
-        <html lang={i18n.language} suppressHydrationWarning>
-            <head>
-                <HeadContent />
-            </head>
-            <body>
-                <ClerkProvider>
+        <ClerkProvider
+            appearance={{ baseTheme: shadcn }}
+            waitlistUrl='/waitlist'
+            localization={i18n.language === Language.PL ? plPL : enUS}
+        >
+            <html lang={i18n.language} suppressHydrationWarning>
+                <head>
+                    <HeadContent />
+                </head>
+                <body>
                     <ThemeProvider>
                         {children}
                         <TanStackDevtools
@@ -68,9 +75,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                             ]}
                         />
                     </ThemeProvider>
-                </ClerkProvider>
-                <Scripts />
-            </body>
-        </html>
+                    <Scripts />
+                </body>
+            </html>
+        </ClerkProvider>
     )
 }

@@ -7,7 +7,7 @@ export const authStateFn = createServerFn({ method: 'GET' }).handler(async () =>
 
     if (!isAuthenticated) {
         throw redirect({
-            to: '/',
+            to: '/sign-in/$',
         })
     }
 

@@ -1,4 +1,9 @@
 {
-    "test": "To jest przykładowy tekst w języku polskim.",
-    "nowe": "To jest nowy wpis w pliku lokalizacji."
+    "nowe": "nowe sytgdasuhd",
+    "hello": "hej",
+    "openDrawer": "Otwórz szufladę",
+    "mainDrawer": "Główna szuflada",
+    "mainDrawerContent": "To jest zawartość głównej szuflady.",
+    "summaryDrawer": "Podsumowanie szuflady",
+    "summaryDrawerContent": "To jest zawartość podsumowania szuflady."
 }
