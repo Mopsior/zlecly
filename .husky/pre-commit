@@ -1,2 +1,3 @@
+pnpm dlx i18next-cli lint
 pnpm exec lint-staged
 pnpm tsc --noEmit
