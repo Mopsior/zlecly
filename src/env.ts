@@ -11,6 +11,7 @@ export const env = createEnv({
     clientPrefix: 'VITE_',
     client: {
         VITE_CLERK_PUBLISHABLE_KEY: z.string().min(1),
+        VITE_REPO: z.url(),
     },
 
     runtimeEnv: import.meta.env,

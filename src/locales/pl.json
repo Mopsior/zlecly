@@ -1,5 +1,12 @@
 {
     "menu": "Menu",
+    "footer": {
+        "build": "Wersja <b><repoUrl>{{buildType}}</repoUrl></b>, kompilacja <code><commitUrl>{{buildHash}}</commitUrl></code>",
+        "buildType": {
+            "dev": "deweloperska",
+            "prod": "produkcyjna"
+        }
+    },
     "": "",
     "nowe": "nowe sytgdasuhd",
     "hello": "hej",

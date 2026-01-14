@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import appCss from '../styles.css?url'
 import { Language } from '@/types/enums'
 import { ThemeProvider } from '@/lib/theme-provider'
+import { Footer } from '@/components/footer'
 
 export const Route = createRootRoute({
     head: () => ({
@@ -63,6 +64,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 <body>
                     <ThemeProvider>
                         {children}
+                        <Footer />
                         <TanStackDevtools
                             config={{
                                 position: 'bottom-right',
