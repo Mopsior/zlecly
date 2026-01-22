@@ -1,7 +1,7 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
-import Drawer from '@/components/drawer'
+import Drawer from '@/features/drawer'
 import { useMediaQuery } from '@/utils/use-media-query'
 import { IS_MOBILE } from '@/types/constants'
 

@@ -1,6 +1,6 @@
 import { Trans, useTranslation } from 'react-i18next'
-import { InlineCode } from './inline-code'
 import { ExternalLink } from './external-link'
+import { InlineCode } from './typograpghy'
 import { env } from '@/env'
 import { cn } from '@/lib/utils'
 
@@ -29,7 +29,7 @@ export const Footer = ({
                     repoUrl: <ExternalLink to={env.VITE_REPO} withUnderline />,
                     commitUrl: import.meta.env.SOURCE_COMMIT ? (
                         <ExternalLink
-                            to={`${env.VITE_REPO}/commit/${import.meta.env.SOURCE_COMMIT.slice(0, 7)}`}
+                            to={`${env.VITE_REPO}/commit/${import.meta.env.SOURCE_COMMIT}`}
                             withUnderline
                         />
                     ) : (
@@ -40,7 +40,8 @@ export const Footer = ({
                     buildType: import.meta.env.PROD
                         ? t('footer.buildType.prod')
                         : t('footer.buildType.dev'),
-                    buildHash: import.meta.env.SOURCE_COMMIT ?? t('footer.buildType.dev'),
+                    buildHash:
+                        import.meta.env.SOURCE_COMMIT.slice(0, 7) ?? t('footer.buildType.dev'),
                 }}
             />
         </div>

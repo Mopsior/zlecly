@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-import Drawer from '@/components/drawer'
+import Drawer from '@/features/drawer'
 
 export const Route = createFileRoute('/app/summary/')({
     component: RouteComponent,
