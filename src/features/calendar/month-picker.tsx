@@ -1,9 +1,11 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { t } from 'i18next'
+import { useMemo } from 'react'
+import { useNavigate, useSearch } from '@tanstack/react-router'
 import { Button } from '../ui/button'
 import { H2 } from '../typograpghy'
-import type { Dispatch, SetStateAction } from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select'
+import { Route } from '@/routes/app'
 
 const monthsItems = {
     1: t('calendar.months.1'),
@@ -20,23 +22,53 @@ const monthsItems = {
     12: t('calendar.months.12'),
 }
 
-export const MonthPicker = ({
-    month,
-    setMonth,
-}: {
-    month: number
-    setMonth: Dispatch<SetStateAction<number>>
-}) => {
+const getYears = () => {
+    const currentYear = new Date().getFullYear()
+    const years = []
+    for (let i = currentYear; i <= currentYear + 4; i++) {
+        years.push(i)
+    }
+    return years
+}
+
+export const MonthPicker = () => {
+    const { month, year } = useSearch({
+        from: Route.fullPath,
+    })
+
+    const navigate = useNavigate()
+
+    const yearsItems = useMemo(() => getYears(), [])
+
     return (
         <div className='flex gap-x-4'>
-            <Button variant='ghost'>
+            <Button
+                variant='ghost'
+                onClick={() => {
+                    const newMonth = month - 1 < 1 ? 12 : month - 1
+                    const newYear = month - 1 < 1 ? year - 1 : year
+                    navigate({ to: '/app', search: { month: newMonth, year: newYear } })
+                }}
+            >
                 <ChevronLeft size={16} className='size-4' />
             </Button>
-            <Select onValueChange={(value) => setMonth(Number(value))} value={month}>
-                <SelectTrigger className='' withInputStyles={false}>
-                    <H2>{monthsItems[month as keyof typeof monthsItems]}</H2>
+            <Select
+                onValueChange={(value) =>
+                    navigate({ to: '/app', search: { month: Number(value) } })
+                }
+                value={month}
+            >
+                <SelectTrigger withInputStyles={false}>
+                    <H2 className='cursor-pointer underline-offset-4 hover:underline'>
+                        {monthsItems[month as keyof typeof monthsItems]}
+                    </H2>
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent
+                    alignItemWithTrigger={false}
+                    side='bottom'
+                    sideOffset={16}
+                    alignOffset={12}
+                >
                     {Object.entries(monthsItems).map(([key, value]) => (
                         <SelectItem key={`month-picker-item-${key}`} value={key}>
                             {value}
@@ -44,7 +76,36 @@ export const MonthPicker = ({
                     ))}
                 </SelectContent>
             </Select>
-            <Button variant='ghost'>
+            <Select
+                onValueChange={(value) => navigate({ to: '/app', search: { year: Number(value) } })}
+                value={year}
+            >
+                <SelectTrigger withInputStyles={false}>
+                    <H2 className='text-muted-foreground cursor-pointer underline-offset-4 hover:underline'>
+                        {year}
+                    </H2>
+                </SelectTrigger>
+                <SelectContent
+                    alignItemWithTrigger={false}
+                    side='bottom'
+                    sideOffset={16}
+                    alignOffset={12}
+                >
+                    {yearsItems.map((year) => (
+                        <SelectItem key={`year-picker-item-${year}`} value={year}>
+                            {year}
+                        </SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
+            <Button
+                variant='ghost'
+                onClick={() => {
+                    const newMonth = month + 1 > 12 ? 1 : month + 1
+                    const newYear = month + 1 > 12 ? year + 1 : year
+                    navigate({ to: '/app', search: { month: newMonth, year: newYear } })
+                }}
+            >
                 <ChevronRight size={16} className='size-4' />
             </Button>
         </div>

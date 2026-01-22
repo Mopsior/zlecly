@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { t } from 'i18next'
 import { CalendarGrid } from './grid'
 import { MonthPicker } from './month-picker'
@@ -15,12 +14,9 @@ const weekdays = {
 }
 
 export const Calendar = () => {
-    const [month, setMonth] = useState<number>(new Date().getMonth() + 1)
-    const [year] = useState<number>(new Date().getFullYear())
-
     return (
         <div className='flex h-full w-full flex-col items-center gap-8 p-8'>
-            <MonthPicker month={month} setMonth={setMonth} />
+            <MonthPicker />
             <div className='grid w-full grid-cols-7'>
                 {Object.values(weekdays).map((day, index) => (
                     <div
@@ -33,7 +29,7 @@ export const Calendar = () => {
                         {day}
                     </div>
                 ))}
-                <CalendarGrid month={month} year={year} />
+                <CalendarGrid />
             </div>
         </div>
     )

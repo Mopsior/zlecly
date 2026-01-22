@@ -18,7 +18,7 @@ const cellVariants = cva('border-border h-16 flex items-center justify-center', 
             [Cell.BOTTOM_RIGHT_FIXED_WIDTH]:
                 'col-span-2 w-[calc(50%+1px)] border-b border-r border-l rounded-br-md',
             [Cell.BOTTOM_LEFT]: 'border-b border-l rounded-bl-md',
-            [Cell.BOTTOM_RIGHT_LEFT]: '',
+            [Cell.BOTTOM_RIGHT_LEFT]: 'border-b border-x rounded-b-md',
             [Cell.CENTER]: 'border-l border-t',
             [Cell.CENTER_FIXED_BOTTOM]: 'border-l border-y',
         },

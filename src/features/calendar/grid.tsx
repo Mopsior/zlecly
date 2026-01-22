@@ -1,8 +1,14 @@
+import { useSearch } from '@tanstack/react-router'
 import { CalendarItem } from './item'
 import { getPosition } from './getCellPosition'
 import { useCalendar } from '@/hooks/use-calendar'
+import { Route } from '@/routes/app'
 
-export const CalendarGrid = ({ month, year }: { month: number; year: number }) => {
+export const CalendarGrid = () => {
+    const { month, year } = useSearch({
+        from: Route.fullPath,
+    })
+
     const { days, firstDayOfMonth, daysInMonth, weeksCount, lastDayOfMonth } = useCalendar({
         month,
         year,
