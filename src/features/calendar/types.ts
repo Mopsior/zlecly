@@ -1,6 +1,8 @@
 export interface ItemProps {
     day: string
     position: Cell
+    isWeekday?: boolean
+    isFreeDay?: boolean
 }
 
 export enum Cell {

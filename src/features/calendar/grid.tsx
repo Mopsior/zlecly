@@ -2,7 +2,7 @@ import { useSearch } from '@tanstack/react-router'
 import { CalendarItem } from './item'
 import { getPosition } from './getCellPosition'
 import { useCalendar } from '@/hooks/use-calendar'
-import { Route } from '@/routes/app'
+import { Route } from '@/routes/app/route'
 
 export const CalendarGrid = () => {
     const { month, year } = useSearch({
@@ -30,6 +30,8 @@ export const CalendarGrid = () => {
                     weeksCount,
                     lastDayOfMonth,
                 )}
+                isWeekday={index % 7 === 5 || index % 7 === 6}
+                isFreeDay={day.isFree}
             />
         )
     })

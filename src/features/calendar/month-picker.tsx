@@ -5,7 +5,7 @@ import { useNavigate, useSearch } from '@tanstack/react-router'
 import { Button } from '../ui/button'
 import { H2 } from '../typograpghy'
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select'
-import { Route } from '@/routes/app'
+import { Route } from '@/routes/app/route'
 
 const monthsItems = {
     1: t('calendar.months.1'),
@@ -22,15 +22,6 @@ const monthsItems = {
     12: t('calendar.months.12'),
 }
 
-const getYears = () => {
-    const currentYear = new Date().getFullYear()
-    const years = []
-    for (let i = currentYear; i <= currentYear + 4; i++) {
-        years.push(i)
-    }
-    return years
-}
-
 export const MonthPicker = () => {
     const { month, year } = useSearch({
         from: Route.fullPath,
@@ -38,7 +29,13 @@ export const MonthPicker = () => {
 
     const navigate = useNavigate()
 
-    const yearsItems = useMemo(() => getYears(), [])
+    const yearsItems = useMemo(() => {
+        const years = []
+        for (let i = year; i <= year + 4; i++) {
+            years.push(i)
+        }
+        return years
+    }, [year])
 
     return (
         <div className='flex gap-x-4'>

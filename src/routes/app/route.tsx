@@ -25,7 +25,12 @@ function RouteComponent() {
 
     return (
         <>
-            <Calendar />
+            <div className='h-full w-full md:grid md:grid-cols-[70%_30%]'>
+                <Calendar />
+                <div className='bg-secondary mt-20 mr-4 rounded-md shadow'>
+                    <Outlet />
+                </div>
+            </div>
             <Drawer
                 trigger={
                     <div className='fixed bottom-4 left-0 w-full px-4 md:hidden'>

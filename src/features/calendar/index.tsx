@@ -21,7 +21,7 @@ export const Calendar = () => {
                 {Object.values(weekdays).map((day, index) => (
                     <div
                         className={cn([
-                            'mb-2 text-center text-sm',
+                            'mb-4 text-center text-sm',
                             index < 5 ? 'text-foreground' : 'text-muted-foreground',
                         ])}
                         key={`calendar-weekday-${day}`}
