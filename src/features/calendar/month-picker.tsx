@@ -6,6 +6,7 @@ import { Button } from '../ui/button'
 import { H2 } from '../typograpghy'
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select'
 import { Route } from '@/routes/app/route'
+import { useKeyPress } from '@/hooks/use-key-press'
 
 const monthsItems = {
     1: t('calendar.months.1'),
@@ -37,16 +38,24 @@ export const MonthPicker = () => {
         return years
     }, [year])
 
+    const handleNextMonth = () => {
+        const newMonth = month + 1 > 12 ? 1 : month + 1
+        const newYear = month + 1 > 12 ? year + 1 : year
+        navigate({ to: '/app', search: { month: newMonth, year: newYear } })
+    }
+
+    const handlePrevMonth = () => {
+        const newMonth = month - 1 < 1 ? 12 : month - 1
+        const newYear = month - 1 < 1 ? year - 1 : year
+        navigate({ to: '/app', search: { month: newMonth, year: newYear } })
+    }
+
+    useKeyPress('ArrowRight', handleNextMonth)
+    useKeyPress('ArrowLeft', handlePrevMonth)
+
     return (
         <div className='flex gap-x-4'>
-            <Button
-                variant='ghost'
-                onClick={() => {
-                    const newMonth = month - 1 < 1 ? 12 : month - 1
-                    const newYear = month - 1 < 1 ? year - 1 : year
-                    navigate({ to: '/app', search: { month: newMonth, year: newYear } })
-                }}
-            >
+            <Button variant='ghost' onClick={handlePrevMonth}>
                 <ChevronLeft size={16} className='size-4' />
             </Button>
             <Select
@@ -95,14 +104,7 @@ export const MonthPicker = () => {
                     ))}
                 </SelectContent>
             </Select>
-            <Button
-                variant='ghost'
-                onClick={() => {
-                    const newMonth = month + 1 > 12 ? 1 : month + 1
-                    const newYear = month + 1 > 12 ? year + 1 : year
-                    navigate({ to: '/app', search: { month: newMonth, year: newYear } })
-                }}
-            >
+            <Button variant='ghost' onClick={handleNextMonth}>
                 <ChevronRight size={16} className='size-4' />
             </Button>
         </div>

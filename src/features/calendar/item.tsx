@@ -8,7 +8,7 @@ import { EventType } from '@/types/enums'
 import { cn } from '@/lib/utils'
 
 const cellVariants = cva(
-    'border-border p-1 h-28 relative flex flex-col items-center gap-y-1 justify-between',
+    'border-border p-1 min-h-28 h-full relative flex flex-col items-center gap-y-1 justify-between',
     {
         variants: {
             position: {

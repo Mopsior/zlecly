@@ -27,8 +27,10 @@ function RouteComponent() {
         <>
             <div className='h-full w-full md:grid md:grid-cols-[70%_30%]'>
                 <Calendar />
-                <div className='bg-secondary mt-20 mr-4 rounded-md shadow'>
-                    <Outlet />
+                <div className='pt-20 pr-6 pb-16'>
+                    <div className='bg-secondary h-full w-full rounded-md shadow'>
+                        <Outlet />
+                    </div>
                 </div>
             </div>
             <Drawer

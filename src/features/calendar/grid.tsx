@@ -14,7 +14,7 @@ export const CalendarGrid = () => {
         year,
     })
 
-    const today = new Date().getDate()
+    const today = new Date()
 
     return days.map((day, index) => {
         const key = `calendar-item-${day?.day}-${month}-${year}-${index}`
@@ -34,7 +34,11 @@ export const CalendarGrid = () => {
                 )}
                 isWeekday={index % 7 === 5 || index % 7 === 6}
                 isFreeDay={day.isFree}
-                isToday={day.day === today}
+                isToday={
+                    day.day === today.getDate() &&
+                    month === today.getMonth() + 1 &&
+                    year === today.getFullYear()
+                }
             />
         )
     })
