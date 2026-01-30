@@ -55,6 +55,10 @@ The theme is applied as a CSS class (`light` or `dark`) on the `<html>` element.
 <div className='bg-white dark:bg-black'>This switches colors based on theme</div>
 ```
 
+## 🐞 Error handling
+
+Handling error should be done through `<ErrorScreen />` component (and added later similar things). This will create one space for sending data to PostHog
+
 ---
 
 ## Testing

@@ -15,6 +15,8 @@ import { Route as TestIndexRouteImport } from './routes/test/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as authWaitlistRouteImport } from './routes/(auth)/waitlist'
 import { Route as AppSummaryIndexRouteImport } from './routes/app/summary/index'
+import { Route as AppShareIndexRouteImport } from './routes/app/share/index'
+import { Route as AppSettingsIndexRouteImport } from './routes/app/settings/index'
 import { Route as authSignUpSplatRouteImport } from './routes/(auth)/sign-up.$'
 import { Route as authSignInSplatRouteImport } from './routes/(auth)/sign-in.$'
 
@@ -48,6 +50,16 @@ const AppSummaryIndexRoute = AppSummaryIndexRouteImport.update({
   path: '/summary/',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AppShareIndexRoute = AppShareIndexRouteImport.update({
+  id: '/share/',
+  path: '/share/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppSettingsIndexRoute = AppSettingsIndexRouteImport.update({
+  id: '/settings/',
+  path: '/settings/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 const authSignUpSplatRoute = authSignUpSplatRouteImport.update({
   id: '/(auth)/sign-up/$',
   path: '/sign-up/$',
@@ -67,6 +79,8 @@ export interface FileRoutesByFullPath {
   '/test': typeof TestIndexRoute
   '/sign-in/$': typeof authSignInSplatRoute
   '/sign-up/$': typeof authSignUpSplatRoute
+  '/app/settings': typeof AppSettingsIndexRoute
+  '/app/share': typeof AppShareIndexRoute
   '/app/summary': typeof AppSummaryIndexRoute
 }
 export interface FileRoutesByTo {
@@ -76,6 +90,8 @@ export interface FileRoutesByTo {
   '/test': typeof TestIndexRoute
   '/sign-in/$': typeof authSignInSplatRoute
   '/sign-up/$': typeof authSignUpSplatRoute
+  '/app/settings': typeof AppSettingsIndexRoute
+  '/app/share': typeof AppShareIndexRoute
   '/app/summary': typeof AppSummaryIndexRoute
 }
 export interface FileRoutesById {
@@ -87,6 +103,8 @@ export interface FileRoutesById {
   '/test/': typeof TestIndexRoute
   '/(auth)/sign-in/$': typeof authSignInSplatRoute
   '/(auth)/sign-up/$': typeof authSignUpSplatRoute
+  '/app/settings/': typeof AppSettingsIndexRoute
+  '/app/share/': typeof AppShareIndexRoute
   '/app/summary/': typeof AppSummaryIndexRoute
 }
 export interface FileRouteTypes {
@@ -99,6 +117,8 @@ export interface FileRouteTypes {
     | '/test'
     | '/sign-in/$'
     | '/sign-up/$'
+    | '/app/settings'
+    | '/app/share'
     | '/app/summary'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -108,6 +128,8 @@ export interface FileRouteTypes {
     | '/test'
     | '/sign-in/$'
     | '/sign-up/$'
+    | '/app/settings'
+    | '/app/share'
     | '/app/summary'
   id:
     | '__root__'
@@ -118,6 +140,8 @@ export interface FileRouteTypes {
     | '/test/'
     | '/(auth)/sign-in/$'
     | '/(auth)/sign-up/$'
+    | '/app/settings/'
+    | '/app/share/'
     | '/app/summary/'
   fileRoutesById: FileRoutesById
 }
@@ -174,6 +198,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSummaryIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/app/share/': {
+      id: '/app/share/'
+      path: '/share'
+      fullPath: '/app/share'
+      preLoaderRoute: typeof AppShareIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/settings/': {
+      id: '/app/settings/'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/(auth)/sign-up/$': {
       id: '/(auth)/sign-up/$'
       path: '/sign-up/$'
@@ -193,11 +231,15 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
+  AppSettingsIndexRoute: typeof AppSettingsIndexRoute
+  AppShareIndexRoute: typeof AppShareIndexRoute
   AppSummaryIndexRoute: typeof AppSummaryIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppIndexRoute: AppIndexRoute,
+  AppSettingsIndexRoute: AppSettingsIndexRoute,
+  AppShareIndexRoute: AppShareIndexRoute,
   AppSummaryIndexRoute: AppSummaryIndexRoute,
 }
 

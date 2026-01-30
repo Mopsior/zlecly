@@ -18,6 +18,9 @@ const searchParams = z.object({
 export const Route = createFileRoute('/app')({
     component: RouteComponent,
     beforeLoad: async () => await authStateFn(),
+    loader: async ({ context }) => {
+        return { userId: context.userId }
+    },
     validateSearch: zodValidator(searchParams),
 })
 
@@ -43,7 +46,7 @@ function RouteComponent() {
                 }
             >
                 <Outlet />
-                <Footer withoutFixed visibleOnMobile />
+                <Footer withoutFixed visibleOnMobile withoutBackground className='mt-4' />
             </Drawer>
         </>
     )

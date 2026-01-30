@@ -1,5 +1,9 @@
 {
+    "return": "Powrót",
     "menu": "Menu",
+    "settings": "Ustawienia aplikacji",
+    "error": "Oopsie, coś poszło nie tak!",
+    "errorSentInfo": "Informacje o błędzie powinny zostać wysłane do twórcy automatycznie",
     "footer": {
         "build": "Wersja <b><repoUrl>{{buildType}}</repoUrl></b>, kompilacja <code><commitUrl>{{buildHash}}</commitUrl></code>",
         "buildType": {
@@ -55,6 +59,12 @@
         "light": "jasny",
         "dark": "ciemny",
         "system": "systemowy"
+    },
+    "appSettings": {
+        "calendars": {
+            "label": "Kalendarze",
+            "add": "Dodaj kalendarz"
+        }
     },
     "": "",
     "exampleDuration": "4h 25min",
