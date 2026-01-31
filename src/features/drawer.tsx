@@ -53,19 +53,42 @@ const DrawerTitle = ({
 }: { children: ReactNode } & ComponentProps<typeof Vaul.Title>) => (
     <Vaul.Title
         {...props}
-        className={cn(['text-lg font-semibold tracking-tight', props.className])}
+        className={cn(['visible text-lg font-semibold tracking-tight md:hidden', props.className])}
     >
         {children}
     </Vaul.Title>
 )
 
-const DrawerHiddenDescription = ({ children }: { children: string }) => (
+const DrawerHiddenTitle = ({ children }: { children: ReactNode }) => (
+    <VisuallyHidden>
+        <Vaul.Title>{children}</Vaul.Title>
+    </VisuallyHidden>
+)
+
+const DrawerDescription = ({
+    children,
+    ...props
+}: { children: ReactNode } & ComponentProps<typeof Vaul.Description>) => (
+    <Vaul.Description
+        {...props}
+        className={cn([
+            'text-muted-foreground visible text-center text-sm md:hidden',
+            props.className,
+        ])}
+    >
+        {children}
+    </Vaul.Description>
+)
+
+const DrawerHiddenDescription = ({ children }: { children: ReactNode }) => (
     <VisuallyHidden>
         <Vaul.Description>{children}</Vaul.Description>
     </VisuallyHidden>
 )
 
 Drawer.Title = DrawerTitle
-Drawer.Nested = NestedDrawer
+Drawer.HiddenTitle = DrawerHiddenTitle
+Drawer.Description = DrawerDescription
 Drawer.HiddenDescription = DrawerHiddenDescription
+Drawer.Nested = NestedDrawer
 export default Drawer

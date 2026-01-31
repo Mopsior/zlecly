@@ -17,6 +17,30 @@
 - `types` - all project-wise types
 ```
 
+## 🌲 How routes are built
+
+_This is about `/routes/app` subpages (we take that as "main" so next paths will be named `/summary` etc.)_
+
+App is divided into two sides - **calendar** and **subpage content**.
+
+Every path (**subpage content**) (without `/`) are rendered either as:
+
+- **Sidebar** for computers
+- **Drawer** for mobile
+
+**Subpage content** is just a component from createFileRoute (so content of page). It's **the same** for Sidebar and Drawer!
+
+Main routes (defined in [selectedRouteTab](src/features/routing/types.ts)) have **Tabs** to select between these two. Other pages have **Return** button.
+
+For A11y, every page requires to have **Title** and **Description** (provided via `useDrawerData` with options isVisible for visually hiding elements). Otherwise it will spam errors in console.
+
+> [!NOTE]
+> `Description` provided via hook have the same styling as small muted text and can replace page description for mobile (but it still won't render on computers!). `Title` does not have it's counterpart on computer
+
+For **Nested drawers** title and description can be provided via `<Drawer.Title>`/`<Drawer.HiddenTitle>` and `<Drawer.Description>`/`<Drawer.HiddenDescription>` elements. There's no need to use any hooks.
+
+Nested drawers should be used as ex. selects for mobile views. Bigger parts should be moved into own sub-sub-page ex. `/summary/...`
+
 ## ⛅ Themes
 
 `ThemeProvider` is configured in [src/lib/theme-provider.tsx](src/lib/theme-provider.tsx)

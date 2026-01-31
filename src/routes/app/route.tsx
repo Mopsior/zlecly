@@ -6,8 +6,8 @@ import type { ReactNode } from 'react'
 import { authStateFn } from '@/functions/auth-state'
 import { Calendar } from '@/features/calendar'
 import { SidebarWrapper } from '@/features/routing/sidebar-wrapper'
-import { DrawerTitleContext } from '@/contexts/drawer-title'
 import { MobileDrawer } from '@/features/routing/drawer'
+import { DrawerDataContext } from '@/contexts/drawer-title'
 
 const searchParams = z.object({
     month: z.number().default(new Date().getMonth() + 1),
@@ -25,16 +25,35 @@ export const Route = createFileRoute('/app')({
 
 function RouteComponent() {
     const [drawerTitle, setDrawerTitle] = useState<ReactNode | null>(null)
+    const [drawerDescriptio, setDrawerDescription] = useState<ReactNode | null>(null)
+    const [isTitleVisible, setIsTitleVisible] = useState<boolean>(false)
+    const [isDescriptionVisible, setIsDescriptionVisible] = useState<boolean>(false)
 
     return (
-        <DrawerTitleContext.Provider value={{ title: drawerTitle, setTitle: setDrawerTitle }}>
+        <DrawerDataContext.Provider
+            value={{
+                title: drawerTitle,
+                setTitle: setDrawerTitle,
+                isTitleVisible: isTitleVisible,
+                setIsTitleVisible: setIsTitleVisible,
+                description: drawerDescriptio,
+                setDescription: setDrawerDescription,
+                isDescriptionVisible: isDescriptionVisible,
+                setIsDescriptionVisible: setIsDescriptionVisible,
+            }}
+        >
             <div className='h-full w-full md:grid md:grid-cols-[auto_450px]'>
                 <Calendar />
                 <SidebarWrapper>
                     <Outlet />
                 </SidebarWrapper>
             </div>
-            <MobileDrawer title={drawerTitle} setTitle={setDrawerTitle} />
-        </DrawerTitleContext.Provider>
+            <MobileDrawer
+                title={drawerTitle}
+                description={drawerDescriptio}
+                isTitleVisible={isTitleVisible}
+                isDescriptionVisible={isDescriptionVisible}
+            />
+        </DrawerDataContext.Provider>
     )
 }

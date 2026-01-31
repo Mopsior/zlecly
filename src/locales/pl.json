@@ -3,7 +3,8 @@
     "menu": "Menu",
     "settings": {
         "short": "Ustawienia",
-        "title": "Ustawienia aplikacji"
+        "title": "Ustawienia aplikacji",
+        "ariaDescription": "Otwórz ustawienia aplikacji"
     },
     "error": "Oopsie, coś poszło nie tak!",
     "errorSentInfo": "Informacje o błędzie powinny zostać wysłane do twórcy automatycznie",

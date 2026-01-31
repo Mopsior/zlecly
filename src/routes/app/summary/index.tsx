@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-import { useDrawerTitle } from '@/hooks/use-drawer-title'
+import { useDrawerData } from '@/hooks/use-drawer-data'
 
 export const Route = createFileRoute('/app/summary/')({
     component: RouteComponent,
@@ -9,7 +9,12 @@ export const Route = createFileRoute('/app/summary/')({
 function RouteComponent() {
     const { t } = useTranslation()
 
-    useDrawerTitle(t('summaryDrawer'))
+    useDrawerData({
+        title: t('summaryDrawer'),
+        isTitleVisible: false,
+        description: t('summaryDrawerContent'),
+        isDescriptionVisible: true,
+    })
 
-    return t('summaryDrawerContent')
+    return <></>
 }
