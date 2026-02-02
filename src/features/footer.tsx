@@ -1,24 +1,30 @@
 import { Trans, useTranslation } from 'react-i18next'
 import { ExternalLink } from './external-link'
-import { InlineCode } from './typograpghy'
+import { InlineCode } from './typography'
 import { env } from '@/env'
 import { cn } from '@/lib/utils'
 
 export const Footer = ({
     withoutFixed = false,
     visibleOnMobile = false,
+    withoutBackground = false,
+    className,
 }: {
     withoutFixed?: boolean
     visibleOnMobile?: boolean
+    withoutBackground?: boolean
+    className?: string
 }) => {
     const { t } = useTranslation()
 
     return (
         <div
             className={cn([
-                'text-muted-foreground bg-background bottom-4 rounded-md px-4 py-2 text-center text-sm',
+                'text-muted-foreground bottom-4 rounded-md px-4 py-2 text-center text-sm',
                 !withoutFixed && 'fixed left-1/2 -translate-x-1/2 transform',
                 !visibleOnMobile && 'not-md:hidden',
+                !withoutBackground && 'bg-background',
+                className,
             ])}
         >
             <Trans

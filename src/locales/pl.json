@@ -1,11 +1,24 @@
 {
+    "return": "Powrót",
     "menu": "Menu",
+    "settings": {
+        "short": "Ustawienia",
+        "title": "Ustawienia aplikacji",
+        "ariaDescription": "Otwórz ustawienia aplikacji"
+    },
+    "error": "Oopsie, coś poszło nie tak!",
+    "errorSentInfo": "Informacje o błędzie powinny zostać wysłane do twórcy automatycznie",
     "footer": {
         "build": "Wersja <b><repoUrl>{{buildType}}</repoUrl></b>, kompilacja <code><commitUrl>{{buildHash}}</commitUrl></code>",
         "buildType": {
             "dev": "deweloperska",
             "prod": "produkcyjna"
         }
+    },
+    "tabs": {
+        "summary": "Podsumowanie",
+        "share": "Udostępnianie",
+        "settings": "Ustawienia"
     },
     "goto": "Przejdź do {{name}}",
     "gotoDestination": {
@@ -43,6 +56,45 @@
                 "custom": "Niestandardowe"
             },
             "more": "Więcej"
+        }
+    },
+    "appSettings": {
+        "calendars": {
+            "label": "Kalendarze",
+            "add": "Dodaj kalendarz",
+            "create": {
+                "label": "Utwórz nowy kalendarz",
+                "description": "Kalendarz odpowiada jednemu miejscu pracy. Nie jest to powiązane z zewnętrznym kalendarzami.",
+                "form": {
+                    "name": {
+                        "label": "Nazwa kalendarza",
+                        "placeholder": "Moja praca",
+                        "required": "Nazwa kalendarza jest wymagana",
+                        "maxLength": "Nazwa kalendarza nie może być dłuższa niż 16 znaków"
+                    },
+                    "color": {
+                        "label": "Kolor",
+                        "invalid": "Nieprawidłowy kolor"
+                    },
+                    "salary": {
+                        "label": "Stawka godzinowa",
+                        "placeholder": "31.40",
+                        "helper": "Możesz ustawić stawkę godzinową dla tego kalendarza, aby obliczyć zarobki na podstawie przepracowanego czasu.",
+                        "invalid": "Nieprawidłowa stawka godzinowa"
+                    },
+                    "submit": "Utwórz kalendarz",
+                    "success": "Kalendarz został pomyślnie utworzony"
+                }
+            }
+        },
+        "themes": {
+            "label": "Motyw",
+            "ariaDescription": "Wybierz motyw aplikacji",
+            "button": "Zmień motyw",
+            "switch": "Zmień motyw na {{theme}}",
+            "light": "jasny",
+            "dark": "ciemny",
+            "system": "systemowy"
         }
     },
     "": "",

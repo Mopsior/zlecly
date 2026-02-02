@@ -1,13 +1,13 @@
 import { Outlet, createFileRoute } from '@tanstack/react-router'
-import { useTranslation } from 'react-i18next'
-import { Menu } from 'lucide-react'
 import { zodValidator } from '@tanstack/zod-adapter'
 import z from 'zod'
-import Drawer from '@/features/drawer'
+import { useState } from 'react'
+import type { ReactNode } from 'react'
 import { authStateFn } from '@/functions/auth-state'
-import { Button } from '@/features/ui/button'
-import { Footer } from '@/features/footer'
 import { Calendar } from '@/features/calendar'
+import { SidebarWrapper } from '@/features/routing/sidebar-wrapper'
+import { MobileDrawer } from '@/features/routing/drawer'
+import { DrawerDataContext } from '@/contexts/drawer-title'
 
 const searchParams = z.object({
     month: z.number().default(new Date().getMonth() + 1),
@@ -17,35 +17,43 @@ const searchParams = z.object({
 export const Route = createFileRoute('/app')({
     component: RouteComponent,
     beforeLoad: async () => await authStateFn(),
+    loader: async ({ context }) => {
+        return { userId: context.userId }
+    },
     validateSearch: zodValidator(searchParams),
 })
 
 function RouteComponent() {
-    const { t } = useTranslation()
+    const [drawerTitle, setDrawerTitle] = useState<ReactNode | null>(null)
+    const [drawerDescriptio, setDrawerDescription] = useState<ReactNode | null>(null)
+    const [isTitleVisible, setIsTitleVisible] = useState<boolean>(false)
+    const [isDescriptionVisible, setIsDescriptionVisible] = useState<boolean>(false)
 
     return (
-        <>
-            <div className='h-full w-full md:grid md:grid-cols-[70%_30%]'>
+        <DrawerDataContext.Provider
+            value={{
+                title: drawerTitle,
+                setTitle: setDrawerTitle,
+                isTitleVisible: isTitleVisible,
+                setIsTitleVisible: setIsTitleVisible,
+                description: drawerDescriptio,
+                setDescription: setDrawerDescription,
+                isDescriptionVisible: isDescriptionVisible,
+                setIsDescriptionVisible: setIsDescriptionVisible,
+            }}
+        >
+            <div className='h-full w-full md:grid md:grid-cols-[auto_450px]'>
                 <Calendar />
-                <div className='pt-20 pr-6 pb-16'>
-                    <div className='bg-secondary h-full w-full rounded-md shadow'>
-                        <Outlet />
-                    </div>
-                </div>
+                <SidebarWrapper>
+                    <Outlet />
+                </SidebarWrapper>
             </div>
-            <Drawer
-                trigger={
-                    <div className='fixed bottom-4 left-0 w-full px-4 md:hidden'>
-                        <Button suppressHydrationWarning className='w-full'>
-                            <Menu />
-                            {t('menu')}
-                        </Button>
-                    </div>
-                }
-            >
-                <Outlet />
-                <Footer withoutFixed visibleOnMobile />
-            </Drawer>
-        </>
+            <MobileDrawer
+                title={drawerTitle}
+                description={drawerDescriptio}
+                isTitleVisible={isTitleVisible}
+                isDescriptionVisible={isDescriptionVisible}
+            />
+        </DrawerDataContext.Provider>
     )
 }
