@@ -14,6 +14,7 @@ import appCss from '../styles.css?url'
 import { Language } from '@/types/enums'
 import { ThemeProvider } from '@/lib/theme-provider'
 import { Footer } from '@/features/footer'
+import { ToasterWrapper } from '@/lib/toaster-wrapper'
 
 export const Route = createRootRoute({
     head: () => ({
@@ -85,6 +86,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                                 },
                             ]}
                         />
+                        <ToasterWrapper />
                     </ThemeProvider>
                     <Scripts />
                 </body>

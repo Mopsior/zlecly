@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from 'react'
 import Drawer from '../drawer'
 import { Button } from '../ui/button'
 import { RadioGroup } from '../radio-group'
@@ -9,11 +10,18 @@ import { useTheme } from '@/lib/theme-provider'
 export const ThemeSettings = () => {
     const { t } = useTranslation()
     const { userTheme, setTheme } = useTheme()
+    const [isHydrated, setIsHydrated] = useState(false)
+
+    useEffect(() => {
+        setIsHydrated(true)
+    }, [])
+
+    if (!isHydrated) return null // Prevent hydration mismatch
 
     const nextTheme = getNextTheme(userTheme as Theme)
 
     return (
-        <div className='flex h-fit w-full flex-col gap-y-2 lg:hidden'>
+        <div className='flex h-fit w-full flex-col gap-y-2 md:hidden'>
             <p className='text-muted-foreground text-sm'>{t('appSettings.themes.label')}</p>
             <Drawer.Nested
                 trigger={

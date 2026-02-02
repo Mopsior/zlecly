@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { getCalendars } from '@/functions/calendar/get-calendars'
-import { QUERY_KEYS } from '@/types/constants'
+import { QueryKeys } from '@/types/constants'
 
 export const useUserCalendars = (userId: string) => {
     const { data, isLoading, isError, error } = useQuery({
-        queryKey: [QUERY_KEYS.USER_CALENDARS, userId],
+        queryKey: [QueryKeys.USER_CALENDARS, userId],
         queryFn: () => getCalendars({ data: { userId } }),
     })
 

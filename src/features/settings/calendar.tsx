@@ -1,9 +1,8 @@
 import { useTranslation } from 'react-i18next'
-import { Plus } from 'lucide-react'
 import { ListItem } from '../calendar/list-item'
-import { Button } from '../ui/button'
 import { ListItemSkeleton } from '../skeletons/list-item'
 import { ErrorScreen } from '../error-screen'
+import { NewCalendarDrawer } from './new-calendar-drawer'
 import { useUserCalendars } from '@/hooks/use-user-calendars'
 import { Route } from '@/routes/app/route'
 import { DEFAULT_CALENDAR_COLORS } from '@/types/constants'
@@ -30,12 +29,7 @@ export const CalendarSettings = () => {
                     }
                 />
             ))}
-            {!isLoading && !isError && (
-                <Button>
-                    <Plus size={16} />
-                    {t('appSettings.calendars.add')}
-                </Button>
-            )}
+            {!isLoading && !isError && <NewCalendarDrawer />}
         </div>
     )
 }
