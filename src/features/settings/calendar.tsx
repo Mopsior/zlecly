@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useUserCalendars } from '@/hooks/use-user-calendars'
 import { Route } from '@/routes/app/route'
-import { DEFAULT_CALENDAR_COLORS } from '@/types/constants'
+import { COLOR_PALETTE } from '@/types/constants'
 import { ListItem } from '../calendar/list-item'
 import { ErrorScreen } from '../error-screen'
 import { ListItemSkeleton } from '../skeletons/list-item'
@@ -23,9 +23,8 @@ export const CalendarSettings = () => {
                     name={calendar.name}
                     color={
                         calendar.color ??
-                        DEFAULT_CALENDAR_COLORS[
-                            Math.floor(Math.random() * DEFAULT_CALENDAR_COLORS.length)
-                        ]
+                        (COLOR_PALETTE[Math.floor(Math.random() * COLOR_PALETTE.length)]
+                            .hex as string)
                     }
                 />
             ))}

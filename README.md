@@ -11,9 +11,9 @@ This project is **not** vibecoded
 ```md
 - `db` - Drizzle schemas
 - `features` - project-wise components
-    - `{segment}` - components, types and local functions for each app segments
-      if anything (component, type or function) is used in any other segment,
-      it needs to be moved to corresponding folder
+  - `{segment}` - components, types and local functions for each app segments
+    if anything (component, type or function) is used in any other segment,
+    it needs to be moved to corresponding folder
 - `hooks` - all hooks
 - `functions` - all (mostly serverside) "functions" from tanstack
 - `lib` - utils for specific libs
@@ -50,9 +50,9 @@ Nested drawers should be used as ex. selects for mobile views. Bigger parts shou
 `ThemeProvider` is configured in [src/lib/theme-provider.tsx](src/lib/theme-provider.tsx)
 
 - **Three theme modes:**
-    - `light` (`Theme.LIGHT`) - Forces light theme
-    - `dark` (`Theme.DARK`) - Forces dark theme
-    - `system` (`Theme.SYSTEM`) - Uses OS preference (default)
+  - `light` (`Theme.LIGHT`) - Forces light theme
+  - `dark` (`Theme.DARK`) - Forces dark theme
+  - `system` (`Theme.SYSTEM`) - Uses OS preference (default)
 
 - User preference is saved in **localStorage**
 - **Flash prevention** - A script injected at startup prevents flash of unstyled content (FOUC)
@@ -61,26 +61,28 @@ Nested drawers should be used as ex. selects for mobile views. Bigger parts shou
 ### Usage
 
 ```tsx
-import { Theme } from '@/types/enums'
+import { Theme } from "@/types/enums";
 // ...
-const { userTheme, appTheme, setTheme } = useTheme()
+const { userTheme, appTheme, setTheme } = useTheme();
 // userTheme - prefered method. It combines user chocie and auto-detecting
 // appTheme - auto-detected  theme
 
 return (
-    <div>
-        <p>Current theme: {userTheme}</p>
-        <button onClick={() => setTheme(Theme.LIGHT)}>Light</button>
-        <button onClick={() => setTheme(Theme.DARK)}>Dark</button>
-        <button onClick={() => setTheme(Theme.SYSTEM)}>System</button>
-    </div>
-)
+  <div>
+    <p>Current theme: {userTheme}</p>
+    <button onClick={() => setTheme(Theme.LIGHT)}>Light</button>
+    <button onClick={() => setTheme(Theme.DARK)}>Dark</button>
+    <button onClick={() => setTheme(Theme.SYSTEM)}>System</button>
+  </div>
+);
 ```
 
 The theme is applied as a CSS class (`light` or `dark`) on the `<html>` element. You can style based on it using Tailwind's `dark:` prefix:
 
 ```tsx
-<div className='bg-white dark:bg-black'>This switches colors based on theme</div>
+<div className="bg-white dark:bg-black">
+  This switches colors based on theme
+</div>
 ```
 
 ## 🐞 Error handling
@@ -90,7 +92,7 @@ Handling error should be done through `<ErrorScreen />` component (and added lat
 ## 🗺️ Roadmap
 
 - [ ] Add mobile calendar view
-- [ ] Move to Biome
+- [x] Move to Biome
 - [ ] Handle months that aren't provided in dataset
 - [ ] **Production**: add PostHog
 
@@ -128,27 +130,27 @@ For example:
 
 ```tsx
 const peopleRoute = createRoute({
-    getParentRoute: () => rootRoute,
-    path: '/people',
-    loader: async () => {
-        const response = await fetch('https://swapi.dev/api/people')
-        return response.json() as Promise<{
-            results: {
-                name: string
-            }[]
-        }>
-    },
-    component: () => {
-        const data = peopleRoute.useLoaderData()
-        return (
-            <ul>
-                {data.results.map((person) => (
-                    <li key={person.name}>{person.name}</li>
-                ))}
-            </ul>
-        )
-    },
-})
+  getParentRoute: () => rootRoute,
+  path: "/people",
+  loader: async () => {
+    const response = await fetch("https://swapi.dev/api/people");
+    return response.json() as Promise<{
+      results: {
+        name: string;
+      }[];
+    }>;
+  },
+  component: () => {
+    const data = peopleRoute.useLoaderData();
+    return (
+      <ul>
+        {data.results.map((person) => (
+          <li key={person.name}>{person.name}</li>
+        ))}
+      </ul>
+    );
+  },
+});
 ```
 
 Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
@@ -166,22 +168,24 @@ pnpm add @tanstack/store
 Now let's create a simple counter in the `src/App.tsx` file as a demonstration.
 
 ```tsx
-import { useStore } from '@tanstack/react-store'
-import { Store } from '@tanstack/store'
-import './App.css'
+import { useStore } from "@tanstack/react-store";
+import { Store } from "@tanstack/store";
+import "./App.css";
 
-const countStore = new Store(0)
+const countStore = new Store(0);
 
 function App() {
-    const count = useStore(countStore)
-    return (
-        <div>
-            <button onClick={() => countStore.setState((n) => n + 1)}>Increment - {count}</button>
-        </div>
-    )
+  const count = useStore(countStore);
+  return (
+    <div>
+      <button onClick={() => countStore.setState((n) => n + 1)}>
+        Increment - {count}
+      </button>
+    </div>
+  );
 }
 
-export default App
+export default App;
 ```
 
 One of the many nice features of TanStack Store is the ability to derive state from other state. That derived state will update when the base state updates.
@@ -189,31 +193,33 @@ One of the many nice features of TanStack Store is the ability to derive state f
 Let's check this out by doubling the count using derived state.
 
 ```tsx
-import { useStore } from '@tanstack/react-store'
-import { Store, Derived } from '@tanstack/store'
-import './App.css'
+import { useStore } from "@tanstack/react-store";
+import { Store, Derived } from "@tanstack/store";
+import "./App.css";
 
-const countStore = new Store(0)
+const countStore = new Store(0);
 
 const doubledStore = new Derived({
-    fn: () => countStore.state * 2,
-    deps: [countStore],
-})
-doubledStore.mount()
+  fn: () => countStore.state * 2,
+  deps: [countStore],
+});
+doubledStore.mount();
 
 function App() {
-    const count = useStore(countStore)
-    const doubledCount = useStore(doubledStore)
+  const count = useStore(countStore);
+  const doubledCount = useStore(doubledStore);
 
-    return (
-        <div>
-            <button onClick={() => countStore.setState((n) => n + 1)}>Increment - {count}</button>
-            <div>Doubled - {doubledCount}</div>
-        </div>
-    )
+  return (
+    <div>
+      <button onClick={() => countStore.setState((n) => n + 1)}>
+        Increment - {count}
+      </button>
+      <div>Doubled - {doubledCount}</div>
+    </div>
+  );
 }
 
-export default App
+export default App;
 ```
 
 We use the `Derived` class to create a new store that is derived from another store. The `Derived` class has a `mount` method that will start the derived store updating.

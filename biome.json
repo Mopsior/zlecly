@@ -6,7 +6,21 @@
         "useIgnoreFile": true
     },
     "files": {
-        "ignoreUnknown": false
+        "ignoreUnknown": false,
+        "includes": [
+            "**",
+            "!**/package-lock.json",
+            "!!**/pnpm-lock.yaml",
+            "!!**/yarn.lock",
+            "!!**/.clerk",
+            "!!**/pnpm-workspace.yaml",
+            "!!**/.husky",
+            "!**/.tsbuildinfo",
+            "!!**/.output/**",
+            "!!**/.tanstack/**",
+            "!!src/routeTree.gen.ts",
+            "!!src/components/ui/**"
+        ]
     },
     "formatter": {
         "enabled": true,
@@ -19,18 +33,7 @@
         "bracketSameLine": false,
         "bracketSpacing": true,
         "expand": "auto",
-        "useEditorconfig": true,
-        "includes": [
-            "**",
-            "!**/package-lock.json",
-            "!**/pnpm-lock.yaml",
-            "!**/yarn.lock",
-            "!**/.clerk",
-            "!**/pnpm-workspace.yaml",
-            "!**/.husky",
-            "!**/.tsbuildinfo",
-            "!**/.output"
-        ]
+        "useEditorconfig": true
     },
     "linter": {
         "enabled": true,
@@ -39,8 +42,7 @@
             "suspicious": {
                 "useAwait": "off"
             }
-        },
-        "includes": ["**", "!/.output/**", "!/.tanstack/**", "!src/components/ui/**"]
+        }
     },
     "javascript": {
         "formatter": {

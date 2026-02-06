@@ -18,18 +18,18 @@ import {
 import { createCalendar } from '@/functions/calendar/create-calendar'
 import { cn } from '@/lib/utils'
 import { Route } from '@/routes/app/route'
-import { QueryKeys } from '@/types/constants'
+import { COLOR_PALETTE, QueryKeys } from '@/types/constants'
 import { catchError } from '@/utils/catch-error'
 import Drawer from '../drawer'
 import { Button } from '../ui/button'
-import { COLOR_PALETTE, formSchema } from './types'
+import { formSchema } from './types'
 
 export const NewCalendarDrawer = () => {
     const { t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
     const { userId } = Route.useLoaderData()
     const createCalendarFn = useServerFn(createCalendar)
-    const queryCClient = useQueryClient()
+    const queryClient = useQueryClient()
 
     const form = useForm({
         defaultValues: {
@@ -60,7 +60,7 @@ export const NewCalendarDrawer = () => {
             }
 
             toast.success(t('appSettings.calendars.create.form.success'))
-            queryCClient.invalidateQueries({ queryKey: [QueryKeys.USER_CALENDARS, userId] })
+            queryClient.invalidateQueries({ queryKey: [QueryKeys.USER_CALENDARS, userId] })
             setIsOpen(false)
             form.reset()
         },
